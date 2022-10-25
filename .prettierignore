@@ -1,4 +1,5 @@
 .eslintrc.js
 .babelrc.js
+tsconfig.json
 dist/
 webpack/

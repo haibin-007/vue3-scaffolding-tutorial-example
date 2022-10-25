@@ -23,6 +23,23 @@ module.exports = {
           configFile: './babel.config.js', // 指定babel配置文件
         },
       },
+    },
+    {
+      files: ["**/*.{ts,tsx}"],              // 只处理 ts 和 tsx 文件
+      parser: "@typescript-eslint/parser",   // 解析 TypeScript
+      parserOptions: {
+        project: ["./tsconfig.json"],        // 指定ts配置文件
+      },
+      plugins: ["@typescript-eslint"],
+      extends: [
+        "plugin:@typescript-eslint/recommended",                          // 官方语法检查
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",  // 类型检查
+      ]
+    },
+    {
+      files: ["**/*.vue"],                    // 只处理 vue 文件
+      parser: "vue-eslint-parser",            // 解析Vue
+      extends: ["plugin:vue/vue3-essential"], // 使用vue3的推荐规则
     }
   ]
 };

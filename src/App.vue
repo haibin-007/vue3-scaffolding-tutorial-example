@@ -10,6 +10,7 @@ const text = ref("hello world!");
 
 <style lang="scss" scoped>
 .app {
-  color: red;
+  color: $color1;
+  @include size(20px);
 }
 </style>

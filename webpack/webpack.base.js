@@ -1,6 +1,8 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { VueLoaderPlugin } = require('vue-loader')
+const ESLintWebpackPlugin = require('eslint-webpack-plugin');
+
 
 module.exports = {
   entry: {
@@ -9,12 +11,20 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "../dist"),
   },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, '../src'),
+    }
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "../public/index.html"),
       favicon: path.resolve(__dirname, "../public/logo.svg"),
     }),
-    new VueLoaderPlugin()
+    new ESLintWebpackPlugin({
+      extensions: ['js','ts','vue']
+    }),
+    new VueLoaderPlugin(),
   ],
   module: {
     rules: [
@@ -45,7 +55,12 @@ module.exports = {
         use: [
           'vue-style-loader',
           'css-loader',
-          'sass-loader'
+          {
+            loader: 'sass-loader',
+            options: {
+              additionalData: `@import "@/assets/css/variables";`,
+            },
+          },
         ]
       }
     ],
